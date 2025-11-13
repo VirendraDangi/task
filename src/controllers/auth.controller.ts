@@ -5,7 +5,9 @@ import jwt from "jsonwebtoken"
 
 
 export const RegisterController = async(req:Request,res:Response)=>{
-      
+  try {
+    
+        
      const {username,email,password} = req.body ;
    
       const isUserExist = await userModel.findOne({
@@ -52,11 +54,20 @@ export const RegisterController = async(req:Request,res:Response)=>{
         user: user
     })
 
+  } catch (error) {
+     res.status(500).json({
+      message : "internal server error" ,
+       error
+     })
+  }
+
 }
 
 export const LoginController = async(req:Request,res:Response)=>{
      
-    const {email,password} = req.body
+  try {
+
+      const {email,password} = req.body
   
      const user = await userModel.findOne({
          email: email
@@ -97,6 +108,13 @@ export const LoginController = async(req:Request,res:Response)=>{
       token,
     });
       
+    
+  } catch (error) {
+    res.status(500).json({
+      message : "internal server error" ,
+       error
+     })
+  }
 }
 
 export const logoutController = async (req: Request, res: Response) => {

@@ -3,7 +3,9 @@ import { todoModel } from "../models/todo.model.js"
 
 export const createTodoController = async (req: Request, res: Response) => {
 
-    const { title, completed, user } = req.body
+try {
+
+        const { title, completed, user } = req.body
 
     if (!title) {
         return res.status(400).json({
@@ -22,6 +24,13 @@ export const createTodoController = async (req: Request, res: Response) => {
         message: "Todo created successfully",
         todo: todo,
     });
+    
+} catch (error) {
+      res.status(500).json({
+      message : "internal server error" ,
+       error
+     })
+}
 
 
 }
@@ -66,22 +75,29 @@ export const updateTodoContorller = async (req: Request, res: Response) => {
 }
 
 export const deleteTodoController = async (req:Request,res:Response) => {
-      
-     const {id} = req.params ;
-
-     const deleteTodo = await todoModel.findByIdAndDelete(id) ;
-
-     if(!deleteTodo){
-        return res.status(404).json({
-             message : "todo not found"
-        })
-     }
-
-     res.status(200).json({
-        message : "todo deleted sucessfully" ,
-        deleteTodo
-
+   try {
+       
+      const {id} = req.params ;
+ 
+      const deleteTodo = await todoModel.findByIdAndDelete(id) ;
+ 
+      if(!deleteTodo){
+         return res.status(404).json({
+              message : "todo not found"
+         })
+      }
+ 
+      res.status(200).json({
+         message : "todo deleted sucessfully" ,
+         deleteTodo
+ 
+      })
+   } catch (error) {
+      res.status(500).json({
+      message : "internal server error" ,
+       error
      })
+   }
      
 }
 
