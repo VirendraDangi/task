@@ -1,0 +1,1 @@
+{"root":["../server.ts","../src/app.ts","../src/controllers/auth.controller.ts","../src/controllers/todo.controller.ts","../src/db/db.ts","../src/middleware/auth.middleware.ts","../src/models/todo.model.ts","../src/models/user.model.ts","../src/routes/auth.route.ts","../src/routes/todo.route.ts","../src/types/express.d.ts","../src/types/jwtpayload.d.ts"],"version":"5.9.3"}
